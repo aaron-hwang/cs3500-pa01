@@ -40,6 +40,9 @@ class MarkdownCompilerTest {
 
   }
 
+  /**
+   * Test compilation of a file collection
+   */
   @Test
   void compileCollection() {
     assertThrows(FileNotFoundException.class,
@@ -52,6 +55,9 @@ class MarkdownCompilerTest {
 
   }
 
+  /**
+   * Test compiling a singular given TraversedFile
+   */
   @Test
   void compileFile() {
     try {

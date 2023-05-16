@@ -18,6 +18,10 @@ class FileCollectionTest {
   FileCollection empty;
   FileTime knownCreationTime;
   FileTime knownModifiedTime;
+
+  /**
+   * Setup for each test method
+   */
   @BeforeEach
   public void setup() {
     traverser = new FileTraverser();
@@ -34,6 +38,9 @@ class FileCollectionTest {
     sample = new TraversedFile(knownCreationTime, knownModifiedTime, amazing);
   }
 
+  /**
+   * Tests whether a file collection is properly sorted
+   */
   @Test
   void testSort() {
     collection.sort(new FilesByName());
@@ -41,6 +48,9 @@ class FileCollectionTest {
         Path.of("amazing.md"));
   }
 
+  /**
+   * Tests whether the add function properly adds an instance of a TraversedFile
+   */
   @Test
   void testAdd() {
     empty.add(sample);
@@ -48,6 +58,9 @@ class FileCollectionTest {
     assertEquals(empty.getFileList().size(), 1);
   }
 
+  /**
+   * Tests whether the getter for a file collection properly works
+   */
   @Test
   void testGetFileList() {
     assertEquals(empty.getFileList().size(), 0);

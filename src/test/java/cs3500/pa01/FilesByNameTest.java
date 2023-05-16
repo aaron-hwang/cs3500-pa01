@@ -28,6 +28,9 @@ class FilesByNameTest {
     collection = new FileCollection(list);
   }
 
+  /**
+   * Tests whether this comparator orders files properly by name
+   */
   @Test
   public void testOrder() {
     collection.sort(new FilesByName());

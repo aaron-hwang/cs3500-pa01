@@ -14,6 +14,10 @@ class FilesByCreatedDateTest {
   FileCollection collection;
   TraversedFile sample1;
   TraversedFile sample2;
+
+  /**
+   * Preconditions for each test
+   */
   @BeforeEach
   public void setup() {
     FileTime knownCreationTime = FileTime.from(Instant.parse("2023-05-14T12:00:00Z"));
@@ -28,6 +32,9 @@ class FilesByCreatedDateTest {
     collection = new FileCollection(list);
   }
 
+  /**
+   * Tests whether this comparator orders files properly by creation date
+   */
   @Test
   public void testCompare() {
     collection.sort(new FilesByCreatedDate());

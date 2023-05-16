@@ -29,6 +29,9 @@ class FilesByModifiedTimeTest {
     collection = new FileCollection(list);
   }
 
+  /**
+   * Tests whether this comparator orders files properly by modified date
+   */
   @Test
   public void testOrder() {
     collection.sort(new FilesByModifiedTime());

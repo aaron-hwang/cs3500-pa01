@@ -23,27 +23,6 @@ class FileTraverserTest {
 
   }
 
-  /**
-   * Tests preVisitDirectory
-   */
-  @Test
-  void testPreVisitDirectory() {
-    //assertEquals(ft.preVisitDirectory(), FileVisitResult.CONTINUE);
-  }
-
-  @Test
-  void testVisitFile() {
-  }
-
-  @Test
-  void testVisitFileFailed() {
-
-  }
-
-  @Test
-  void testPostVisitDirectory() {
-  }
-
   @Test
   void testGetVisitedFiles() {
     assertEquals(ft.getVisitedFiles().getFileList(), fc.getFileList());
@@ -51,10 +30,23 @@ class FileTraverserTest {
         () -> ft0.getVisitedFiles());
   }
 
+  /**
+   * Test error handler
+   */
   @Test
   public void testErrorHandler() {
     assertThrows(IOException.class,
         () -> ft.errorHandler("Error message"));
+  }
+
+  /**
+   * Test success handler
+   */
+  @Test
+  public void testSuccessHandler() {
+    assertEquals(ft.successHandler("test message",
+        Path.of("src/test/resources/among.md")),
+        "test message");
   }
 
 }
