@@ -31,7 +31,7 @@ class DriverTest {
       invalidInputPath =
           new String[] {"src/test/more/:'ä'jimmbob", "created", "src/test/resources/more/output"};
       invalidOutputPath = new String[] {"src/test/resources", "modified", "src/test/resourcesä:::"};
-      invalidOutputPath1 = new String[] {"src/test/resources", "filename", "src/test/resources:::"};
+      invalidOutputPath1 = new String[] {"src/test/resources", "filename", "src/test/resourcesä:::"};
   }
 
   /**
