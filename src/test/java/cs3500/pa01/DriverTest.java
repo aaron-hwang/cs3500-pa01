@@ -28,7 +28,8 @@ class DriverTest {
       validInput = new String[] {"src/test/resources", "filename", "outputFolder/output"};
       badOutputPath = new String[] {"src/test/resources", "filename", "src/test/resources"};
       invalidOrder = new String[] {"src/test/resources", "thisisbad", "src/test/resources/output"};
-      invalidInputPath = new String[] {"src/test/::jimmbob", "created", "src/test/resources/output"};
+      invalidInputPath =
+          new String[] {"src/test/more/::jimmbob", "created", "src/test/resources/more/output"};
       invalidOutputPath = new String[] {"src/test/resources", "modified", "src/test/resources:::"};
       invalidOutputPath1 = new String[] {"src/test/resources", "filename", "src/test/resources:::"};
   }
