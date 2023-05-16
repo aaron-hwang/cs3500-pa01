@@ -18,11 +18,14 @@ class MarkdownCompilerTest {
   FileCollection fc = new FileCollection();
   FileCollection fc1;
   TraversedFile sampleInvalid;
+  TraversedFile sampleValid;
+  Path among;
   @BeforeEach
   public void setup() {
     FileTime knownCreationTime = FileTime.from(Instant.parse("2023-05-14T12:00:00Z"));
     FileTime knownModifiedTime = FileTime.from(Instant.parse("2023-05-15T12:00:00Z"));
     Path burger = Path.of("burger.md");
+    among = Path.of("src/test/resources/among.md");
     try {
       Files.walkFileTree(Path.of("src/test/resources"), ft);
     } catch (IOException e) {
@@ -31,6 +34,7 @@ class MarkdownCompilerTest {
     fc = ft.getVisitedFiles();
     fc1 = new FileCollection();
     sampleInvalid = new TraversedFile(knownCreationTime, knownModifiedTime, burger);
+    sampleValid = new TraversedFile(knownCreationTime, knownModifiedTime, among);
 
     fc1.add(sampleInvalid);
 
@@ -56,5 +60,11 @@ class MarkdownCompilerTest {
     } catch (Exception e) {
       fail();
     }
+    try {
+      assertEquals(mc.compileFile(sampleValid).substring(0, 1), "#");
+    } catch (Exception e) {
+      fail();
+    }
+
   }
 }

@@ -1,0 +1,38 @@
+package cs3500.pa01;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class FilesByNameTest {
+  FileCollection collection;
+  TraversedFile sample1;
+  TraversedFile sample2;
+  @BeforeEach
+  public void setup() {
+    FileTime knownCreationTime = FileTime.from(Instant.parse("2023-05-14T12:00:00Z"));
+    FileTime knownModifiedTime = FileTime.from(Instant.parse("2023-05-15T12:00:00Z"));
+    Path amazing = Path.of("amazing.md");
+    FileTime knownCreationTime1 = FileTime.from(Instant.parse("2023-05-12T12:00:00Z"));
+    FileTime knownModifiedTime1 = FileTime.from(Instant.parse("2023-05-16T12:00:00Z"));
+    Path among = Path.of("among.md");
+    sample1 = new TraversedFile(knownCreationTime, knownModifiedTime, amazing);
+    sample2 = new TraversedFile(knownCreationTime1, knownModifiedTime1, among);
+    ArrayList<TraversedFile> list = new ArrayList<>(Arrays.asList(sample1, sample2));
+    collection = new FileCollection(list);
+  }
+
+  @Test
+  public void testOrder() {
+    collection.sort(new FilesByName());
+    assertEquals(collection.getFileList().get(0), sample1);
+    assertEquals(collection.getFileList().get(1), sample2);
+  }
+
+}

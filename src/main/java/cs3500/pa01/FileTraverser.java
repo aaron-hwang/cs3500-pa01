@@ -7,7 +7,6 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Objects;
 
 /**
  * A class that implements FileTraverser, for the purpose of walking our file tree
@@ -23,17 +22,19 @@ public class FileTraverser implements FileVisitor<Path> {
 
 
   @Override
-  public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+  public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
     this.haveVisited = true;
-    System.out.format("Beginning traversal of directory %s%n", dir);
+    this.successHandler("Beginning traversal of directory %s%n", dir);
     return CONTINUE;
   }
 
   @Override
-  public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+  public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
     this.haveVisited = true;
     if (attrs.isRegularFile() && file.getFileName().toString().endsWith(".md")) {
-      this.visitedFiles.add(file);
+      TraversedFile traveled =
+          new TraversedFile(attrs.creationTime(), attrs.lastModifiedTime(), file);
+      this.visitedFiles.add(traveled);
 
     }
     return CONTINUE;
@@ -42,12 +43,12 @@ public class FileTraverser implements FileVisitor<Path> {
   @Override
   public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
     this.haveVisited = true;
-    System.err.println(exc);
+    this.errorHandler("Could not visit file");
     return CONTINUE;
   }
 
   @Override
-  public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+  public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
     this.haveVisited = true;
     return CONTINUE;
   }
@@ -64,5 +65,23 @@ public class FileTraverser implements FileVisitor<Path> {
       return this.visitedFiles;
     }
   }
+
+  /**
+   * Method for handling when a file visit is unsuccesssful
+   * @param errorMessage the message we want to throw
+   * @return Returns the error message
+   * @throws IOException when there is an issue with IO
+   */
+  public String errorHandler(String errorMessage) throws IOException {
+    System.err.println(errorMessage);
+    throw new IOException(errorMessage);
+  }
+
+  public String successHandler(String successMessage, Path dir) {
+    System.out.format(successMessage,dir);
+    return successMessage;
+  }
+
+
 
 }
