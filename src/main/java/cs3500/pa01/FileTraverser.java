@@ -41,12 +41,13 @@ public class FileTraverser implements FileVisitor<Path> {
 
   /**
    *
+   *
    * @param file
    *          a reference to the file
    * @param attrs
    *          the file's basic attributes
    *
-   * @return The FileVisitResult representing whether to continue traversing
+   * @return FileVisitResult representing whether to keep going
    */
   @Override
   public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
@@ -60,16 +61,7 @@ public class FileTraverser implements FileVisitor<Path> {
     return CONTINUE;
   }
 
-  /**
-   *
-   * @param file
-   *          a reference to the file
-   * @param exc
-   *          the I/O exception that prevented the file from being visited
-   *
-   * @return FileVisitResult that represents whether to keep traversing
-    **  @throws IOException when a file fails to be visited
-    */
+
   @Override
   public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
     this.haveVisited = true;
@@ -77,17 +69,6 @@ public class FileTraverser implements FileVisitor<Path> {
     return CONTINUE;
   }
 
-  /**
-   *
-   * @param dir
-   *          a reference to the directory
-   * @param exc
-   *          {@code null} if the iteration of the directory completes without
-   *          an error; otherwise the I/O exception that caused the iteration
-   *          of the directory to complete prematurely
-   *
-   * @return the FileVisitResult determining whether or not to continue traversing
-   */
   @Override
   public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
     this.haveVisited = true;

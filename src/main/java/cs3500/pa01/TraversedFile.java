@@ -50,7 +50,7 @@ public class TraversedFile {
    *
    * @param other the other traversed file to compare to
    *
-   * @return an int >1 if greater than, 0 if equal, <0 if less than
+   * @return an int greater than 1 if greater than, 0 if equal, less than 0 if less than
    */
   public int compareCreatedTime(TraversedFile other) {
     return this.createdTime.compareTo(other.createdTime);
@@ -61,7 +61,7 @@ public class TraversedFile {
    *
    * @param other the other traversed file to compare to
    *
-   * @return an int >1 if greater than, 0 if equal, <0 if less than
+   * @return an int greater than 1 if greater than, 0 if equal, less than 0 if less than
    */
   public int compareName(TraversedFile other) {
     return this.rawFile.getFileName().compareTo(other.rawFile.getFileName());
