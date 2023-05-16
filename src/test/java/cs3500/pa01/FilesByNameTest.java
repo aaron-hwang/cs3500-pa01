@@ -21,7 +21,7 @@ class FilesByNameTest {
     Path amazing = Path.of("amazing.md");
     FileTime knownCreationTime1 = FileTime.from(Instant.parse("2023-05-12T12:00:00Z"));
     FileTime knownModifiedTime1 = FileTime.from(Instant.parse("2023-05-16T12:00:00Z"));
-    Path among = Path.of("among.md");
+    Path among = Path.of("more/among.md");
     sample1 = new TraversedFile(knownCreationTime, knownModifiedTime, amazing);
     sample2 = new TraversedFile(knownCreationTime1, knownModifiedTime1, among);
     ArrayList<TraversedFile> list = new ArrayList<>(Arrays.asList(sample1, sample2));

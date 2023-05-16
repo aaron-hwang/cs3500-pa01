@@ -25,14 +25,20 @@ public class MarkdownCompiler {
     ArrayList<TraversedFile> files;
     files = collection.getFileList();
 
+    boolean foundContentYet = false;
     for (TraversedFile f : files) {
       try {
         build.append(this.compileFile(f));
       } catch (FileNotFoundException e) {
         throw new FileNotFoundException("One or more files could not be found");
       }
+      foundContentYet = !this.compileFile(f).equals("");
 
-      build.append("\n");
+      if (foundContentYet) {
+        build.append("\n");
+      }
+
+
     }
 
     return build.toString();
@@ -45,7 +51,7 @@ public class MarkdownCompiler {
    */
   public String compileFile(TraversedFile file) throws FileNotFoundException {
     StringBuilder stringBuild = new StringBuilder();
-    Scanner fileScan = null;
+    Scanner fileScan;
 
     //Initialize scanner
     try {

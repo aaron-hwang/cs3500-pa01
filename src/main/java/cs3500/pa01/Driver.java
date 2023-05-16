@@ -22,19 +22,19 @@ public class Driver {
    */
   public static void main(String[] args) throws IOException {
     System.out.println("Hello from PA01 Template Repo");
-    //initialize input and ouput
-    Path inputPath = null;
-    Path outputPath = null;
+    //initialize input and output
+    Path inputPath;
+    Path outputPath;
 
     //Initialize markdown compiler
     MarkdownCompiler compiler = new MarkdownCompiler();
 
     //Initialize our file traverser and collection
     FileTraverser ft = new FileTraverser();
-    FileCollection filesToCompile = new FileCollection();
+    FileCollection filesToCompile;
 
     //Initialize our comparator
-    Comparator<TraversedFile> ordering = null;
+    Comparator<TraversedFile> ordering;
     String fileOrder = args[1];
     FileOrdering order = FileOrdering.valueOf(fileOrder.toUpperCase());
 
@@ -82,7 +82,7 @@ public class Driver {
     }
 
     //Create a file writer, attempt to write to a new file
-    FileWriter writeToOutput = null;
+    FileWriter writeToOutput;
 
     try {
       writeToOutput = new FileWriter(output);

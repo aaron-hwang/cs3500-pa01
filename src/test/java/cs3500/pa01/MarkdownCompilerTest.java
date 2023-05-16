@@ -24,10 +24,10 @@ class MarkdownCompilerTest {
   public void setup() {
     FileTime knownCreationTime = FileTime.from(Instant.parse("2023-05-14T12:00:00Z"));
     FileTime knownModifiedTime = FileTime.from(Instant.parse("2023-05-15T12:00:00Z"));
-    Path burger = Path.of("burger.md");
-    among = Path.of("src/test/resources/among.md");
+    Path burger = Path.of("src/test/resources/burger.md");
+    among = Path.of("src/test/resources/more/among.md");
     try {
-      Files.walkFileTree(Path.of("src/test/resources"), ft);
+      Files.walkFileTree(Path.of("src/test/resources/more"), ft);
     } catch (IOException e) {
       fail();
     }
@@ -47,12 +47,12 @@ class MarkdownCompilerTest {
   void compileCollection() {
     assertThrows(FileNotFoundException.class,
         () -> mc.compileCollection(fc1));
+
     try {
       assertEquals(mc.compileCollection(fc).substring(0, 1), "#");
-    } catch (FileNotFoundException e) {
+    } catch (Exception e) {
       fail();
     }
-
   }
 
   /**

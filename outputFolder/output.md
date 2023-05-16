@@ -1,4 +1,3 @@
-
 # Vectors
 [[Vectors act like resizable arrays]]
 ## Declaring a vector
@@ -8,8 +7,6 @@
 [[v.add(object of type);]]
 [[hello this is 
 - a test]]
-
-[[]]
 
 # Java Arrays
 [[An **array** is a collection of variables of the same type]]
