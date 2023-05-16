@@ -15,12 +15,23 @@ public class FileTraverser implements FileVisitor<Path> {
   private FileCollection visitedFiles;
   private boolean haveVisited;
 
+  /**
+   * Default constructor for a FileTraverser
+   */
   public FileTraverser() {
     this.visitedFiles = new FileCollection();
     this.haveVisited = false;
   }
 
-
+  /**
+   *
+   * @param dir
+   *          a reference to the directory
+   * @param attrs
+   *          the directory's basic attributes
+   *
+   * @return the FileVisitResult of traversing this directory
+   */
   @Override
   public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
     this.haveVisited = true;
@@ -28,6 +39,15 @@ public class FileTraverser implements FileVisitor<Path> {
     return CONTINUE;
   }
 
+  /**
+   *
+   * @param file
+   *          a reference to the file
+   * @param attrs
+   *          the file's basic attributes
+   *
+   * @return The FileVisitResult representing whether to continue traversing
+   */
   @Override
   public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
     this.haveVisited = true;
@@ -40,6 +60,16 @@ public class FileTraverser implements FileVisitor<Path> {
     return CONTINUE;
   }
 
+  /**
+   *
+   * @param file
+   *          a reference to the file
+   * @param exc
+   *          the I/O exception that prevented the file from being visited
+   *
+   * @return FileVisitResult that represents whether to keep traversing
+    **  @throws IOException when a file fails to be visited
+    */
   @Override
   public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
     this.haveVisited = true;
@@ -47,6 +77,17 @@ public class FileTraverser implements FileVisitor<Path> {
     return CONTINUE;
   }
 
+  /**
+   *
+   * @param dir
+   *          a reference to the directory
+   * @param exc
+   *          {@code null} if the iteration of the directory completes without
+   *          an error; otherwise the I/O exception that caused the iteration
+   *          of the directory to complete prematurely
+   *
+   * @return the FileVisitResult determining whether or not to continue traversing
+   */
   @Override
   public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
     this.haveVisited = true;
@@ -55,19 +96,22 @@ public class FileTraverser implements FileVisitor<Path> {
 
   /**
    * Return all the files visited by this file
+   *
    * @return A FileCollection representing all files visited by this traverser.
    */
   public FileCollection getVisitedFiles() {
+    FileCollection result;
     if (!this.haveVisited) {
       throw new IllegalStateException("Cannot compile when file traverser has not yet traversed");
+    } else {
+      result = this.visitedFiles;
     }
-    else {
-      return this.visitedFiles;
-    }
+    return result;
   }
 
   /**
    * Method for handling when a file visit is unsuccesssful
+   *
    * @param errorMessage the message we want to throw
    * @return Returns the error message
    * @throws IOException when there is an issue with IO
@@ -79,12 +123,12 @@ public class FileTraverser implements FileVisitor<Path> {
 
   /**
    *
-   * @param successMessage
-   * @param dir
-   * @return
+   * @param successMessage The message to indicate success
+   * @param dir the directory passed in
+   * @return the message to indicate success
    */
   public String successHandler(String successMessage, Path dir) {
-    System.out.format(successMessage,dir);
+    System.out.format(successMessage, dir);
     return successMessage;
   }
 

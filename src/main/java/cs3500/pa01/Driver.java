@@ -19,6 +19,7 @@ public class Driver {
    * @param args - args[0]: Absolute/Relative path towards directory with desired .md files,
    *               args[1]: Desired ordering of files
    *               args[2]: Desired Absolute/relative path of output file
+   * @throws IOException will throw an IOException if something is wrong with the file directory
    */
   public static void main(String[] args) throws IOException {
     System.out.println("Hello from PA01 Template Repo");
@@ -28,10 +29,6 @@ public class Driver {
 
     //Initialize markdown compiler
     MarkdownCompiler compiler = new MarkdownCompiler();
-
-    //Initialize our file traverser and collection
-    FileTraverser ft = new FileTraverser();
-    FileCollection filesToCompile;
 
     //Initialize our comparator
     Comparator<TraversedFile> ordering;
@@ -57,7 +54,7 @@ public class Driver {
     try {
       inputPath = Path.of(args[0]);
     } catch (InvalidPathException exception) {
-      throw new InvalidPathException(args[0],"That is not a valid input path");
+      throw new InvalidPathException(args[0], "That is not a valid input path");
     }
 
     try {
@@ -65,6 +62,9 @@ public class Driver {
     } catch (InvalidPathException e) {
       throw new InvalidPathException(args[2], "Invalid output path");
     }
+
+    //Initialize our file traverser
+    FileTraverser ft = new FileTraverser();
 
     //Initialize and walk our file tree
     try {
@@ -89,15 +89,17 @@ public class Driver {
     } catch (IOException e) {
       throw new IOException("Could not initialize file writer");
     }
+    FileCollection filesToCompile;
 
     filesToCompile = ft.getVisitedFiles();
     filesToCompile.sort(ordering);
 
+    //Throw an error if we can't write to a file for whatever reason.
     try {
       writeToOutput.write(compiler.compileCollection(filesToCompile));
       writeToOutput.close();
     } catch (IOException e) {
-     throw new IOException("Could not write to file");
+      throw new IOException("Could not write to file");
     }
 
 

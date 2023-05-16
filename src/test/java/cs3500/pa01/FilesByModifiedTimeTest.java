@@ -1,6 +1,6 @@
 package cs3500.pa01;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;

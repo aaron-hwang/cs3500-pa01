@@ -1,6 +1,8 @@
 package cs3500.pa01;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +14,10 @@ class FileTraverserTest {
   FileTraverser ft = new FileTraverser();
   FileTraverser ft0 = new FileTraverser();
   FileCollection fc;
+
+  /**
+   * Setup for each test
+   */
   @BeforeEach
   public void setup() {
     try {
@@ -23,6 +29,9 @@ class FileTraverserTest {
 
   }
 
+  /**
+   * Test the getVisitedFiles method
+   */
   @Test
   void testGetVisitedFiles() {
     assertEquals(ft.getVisitedFiles().getFileList(), fc.getFileList());

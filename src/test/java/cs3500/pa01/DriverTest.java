@@ -1,6 +1,8 @@
 package cs3500.pa01;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,19 +21,23 @@ class DriverTest {
   String[] badOutputPath;
   String[] ioexceptionPath;
   String[] ioexceptionPathFirstArgFail;
+
+  /**
+   * Setup for tests
+   */
   @BeforeEach
   public void setup() {
     ioexceptionPath =
-        new String[]{"src/test/resources","filename","pa01-aaronhwang/outputFolder/output"};
+        new String[]{"src/test/resources", "filename", "pa01-aaronhwang/outputFolder/output"};
     ioexceptionPathFirstArgFail =
-        new String[]{"pa01-aaronhwang","modified", "outputFolder/output"};
-      validInput = new String[] {"src/test/resources", "filename", "outputFolder/output"};
-      badOutputPath = new String[] {"src/test/resources", "filename", "src/test/resources"};
-      invalidOrder = new String[] {"src/test/resources", "thisisbad", "src/test/resources/output"};
-      invalidInputPath =
-          new String[] {"src/test/more/:'ä'jimmbob", "created", "src/test/resources/more/output"};
-      invalidOutputPath = new String[] {"src/test/resources", "modified", "src/test/resourcesä:::"};
-      invalidOutputPath1 = new String[] {"src/test/resources", "filename", "src/test/resourcesä:::"};
+        new String[]{"pa01-aaronhwang", "modified", "outputFolder/output"};
+    validInput = new String[] {"src/test/resources", "filename", "outputFolder/output"};
+    badOutputPath = new String[] {"src/test/resources", "filename", "src/test/resources"};
+    invalidOrder = new String[] {"src/test/resources", "thisisbad", "src/test/resources/output"};
+    invalidInputPath =
+        new String[] {"src/test/more/:'ä'jimmbob", "created", "src/test/resources/more/output"};
+    invalidOutputPath = new String[] {"src/test/resources", "modified", "src/test/resourcesä:::"};
+    invalidOutputPath1 = new String[] {"src/test/resources", "filename", "src/test/resourcesä:::"};
   }
 
   /**

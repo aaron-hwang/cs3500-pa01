@@ -14,11 +14,16 @@ public class MarkdownCompiler {
   private String headerFlag = "#";
 
   /**
-   * Compiles a FileCollection to a singular string containing the contents of
-   * all files in the FileCollection
-   * @return a string representing contents of all files, only returning the headers and "important"
-   * content
-   * @param collection the collection one wishes to compile
+    * Compiles a FileCollection to a singular string containing the contents of
+    * all files in the FileCollection
+    *
+    * @param collection the collection one wishes to compile
+    *
+    * @return a string representing contents of all files,
+    * only returning the headers and "important"
+    * content
+    *
+    * @throws FileNotFoundException when a file is unable to be processed
    */
   public String compileCollection(FileCollection collection) throws FileNotFoundException {
     StringBuilder build = new StringBuilder();
@@ -33,21 +38,19 @@ public class MarkdownCompiler {
         throw new FileNotFoundException("One or more files could not be found");
       }
       foundContentYet = !this.compileFile(f).equals("");
-
       if (foundContentYet) {
         build.append("\n");
       }
-
-
     }
-
     return build.toString();
   }
 
   /**
    * Compile a singular markdown file
+   *
    * @param file The file we'd like to compilke
    * @return The important contents and headers of the file,as a String
+   * @throws FileNotFoundException when a given file path is not able to be found
    */
   public String compileFile(TraversedFile file) throws FileNotFoundException {
     StringBuilder stringBuild = new StringBuilder();

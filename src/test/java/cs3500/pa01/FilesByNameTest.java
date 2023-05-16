@@ -1,6 +1,6 @@
 package cs3500.pa01;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
@@ -14,6 +14,10 @@ class FilesByNameTest {
   FileCollection collection;
   TraversedFile sample1;
   TraversedFile sample2;
+
+  /**
+   * Setup for each test
+   */
   @BeforeEach
   public void setup() {
     FileTime knownCreationTime = FileTime.from(Instant.parse("2023-05-14T12:00:00Z"));

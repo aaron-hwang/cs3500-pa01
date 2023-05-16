@@ -9,10 +9,18 @@ import java.util.Comparator;
 public class FileCollection {
   private ArrayList<TraversedFile> fileList;
 
+  /**
+   * Default constructor
+   */
   public FileCollection() {
     this.fileList = new ArrayList<>();
   }
 
+  /**
+   * Convenience constructor
+   *
+   * @param traveled The arraylist of traversed file to pass in to instantiate with
+   */
   public FileCollection(ArrayList<TraversedFile> traveled) {
     this.fileList = traveled;
   }
@@ -37,8 +45,11 @@ public class FileCollection {
 
   /**
    * Get the raw arraylist of file paths
+   *
    * @return this collection's filelist
    */
-  public ArrayList<TraversedFile> getFileList() { return this.fileList; }
+  public ArrayList<TraversedFile> getFileList() {
+    return this.fileList;
+  }
 
 }
