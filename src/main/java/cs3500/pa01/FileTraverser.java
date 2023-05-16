@@ -77,6 +77,12 @@ public class FileTraverser implements FileVisitor<Path> {
     throw new IOException(errorMessage);
   }
 
+  /**
+   *
+   * @param successMessage
+   * @param dir
+   * @return
+   */
   public String successHandler(String successMessage, Path dir) {
     System.out.format(successMessage,dir);
     return successMessage;
