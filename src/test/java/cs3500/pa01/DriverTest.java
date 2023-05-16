@@ -3,7 +3,9 @@ package cs3500.pa01;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +25,7 @@ class DriverTest {
         new String[]{"src/test/resources","filename","pa01-aaronhwang/outputFolder/output"};
     ioexceptionPathFirstArgFail =
         new String[]{"pa01-aaronhwang","modified", "outputFolder/output"};
-      validInput = new String[] {"src/test/resources", "filename", "src/test/resources/output"};
+      validInput = new String[] {"src/test/resources", "filename", "outputFolder/output"};
       badOutputPath = new String[] {"src/test/resources", "filename", "src/test/resources"};
       invalidOrder = new String[] {"src/test/resources", "thisisbad", "src/test/resources/output"};
       invalidInputPath = new String[] {"src/test/::jimmbob", "created", "src/test/resources/output"};
@@ -74,6 +76,22 @@ class DriverTest {
     }
 
   }
+
+  @Test
+  public void testWritingException() {
+
+  }
+
+  @Test
+  public void testWritingSuccess() {
+    try {
+      Driver.main(validInput);
+    } catch (Exception e) {
+      fail();
+    }
+    assertTrue(Files.exists(Path.of("outputFolder/output.md")));
+  }
+
 
 
 }

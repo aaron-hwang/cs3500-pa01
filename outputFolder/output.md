@@ -1,3 +1,4 @@
+
 # Vectors
 [[Vectors act like resizable arrays]]
 ## Declaring a vector
