@@ -57,7 +57,7 @@ public class Driver {
     try {
       inputPath = Path.of(args[0]);
     } catch (InvalidPathException exception) {
-      throw new InvalidPathException(args[0 ],"That is not a valid input path");
+      throw new InvalidPathException(args[0],"That is not a valid input path");
     }
 
     try {
