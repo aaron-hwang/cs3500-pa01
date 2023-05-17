@@ -101,8 +101,6 @@ public class Driver {
     } catch (IOException e) {
       throw new IOException("Could not write to file");
     }
-
-
-
   }
+
 }

@@ -43,18 +43,27 @@ class TraversedFileTest {
     assertEquals(sample2.getRawFile(), Path.of("src/test/resources/among.md"));
   }
 
+  /**
+   * test the method compareModifiedTime
+   */
   @Test
   public void testCompareModifiedTime() {
     assertTrue(sample1.compareModifiedTime(sample2) < 0);
     assertFalse(sample2.compareModifiedTime(sample1) < 0);
   }
 
+  /**
+   * test the method compareCreatedTime
+   */
   @Test
   public void testCompareCreationTime() {
     assertTrue(sample1.compareCreatedTime(sample2) > 0);
     assertFalse(sample2.compareCreatedTime(sample1) > 0);
   }
 
+  /**
+   * Test the method compareName
+   */
   @Test
   public void testCompareName() {
     assertTrue(sample1.compareName(sample2) < 0);

@@ -89,6 +89,9 @@ class DriverTest {
 
   }
 
+  /**
+   * test when we successfully write to a file
+   */
   @Test
   public void testWritingSuccess() {
     try {
