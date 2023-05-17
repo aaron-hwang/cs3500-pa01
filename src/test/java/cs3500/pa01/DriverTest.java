@@ -18,7 +18,7 @@ class DriverTest {
   String[] invalidOutputPath;
   String[] invalidOutputPath1;
   String[] validInput;
-  String[] badOutputPath;
+  String[] badInputPath;
   String[] ioexceptionPath;
   String[] ioexceptionPathFirstArgFail;
 
@@ -32,7 +32,7 @@ class DriverTest {
     ioexceptionPathFirstArgFail =
         new String[]{"pa01-aaronhwang", "modified", "outputFolder/output"};
     validInput = new String[] {"src/test/resources", "filename", "outputFolder/output"};
-    badOutputPath = new String[] {"src/test/resources", "filename", "src/test/resources"};
+    badInputPath = new String[] {"src/test/resources/bobrobert", "filename", "src/test/resources"};
     invalidOrder = new String[] {"src/test/resources", "thisisbad", "src/test/resources/output"};
     invalidInputPath =
         new String[] {"src/test/more/:'ä'jimmbob", "created", "src/test/resources/more/output"};
@@ -84,9 +84,16 @@ class DriverTest {
 
   }
 
-  @Test
-  public void testWritingException() {
-
+  /**
+   * Test when the filepaths don't exist
+   */
+  public void testBadFilePaths() {
+    try {
+      assertThrows(IOException.class,
+          () -> Driver.main(badInputPath));
+    } catch (Exception e) {
+      fail();
+    }
   }
 
   /**
